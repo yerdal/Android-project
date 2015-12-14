@@ -31,9 +31,24 @@ public class pswStrengthCheck extends View{
             //Log.d("PASSWORD RED CHECK", "EINARS BALLE");
             //redPaint.setAlpha(255);
             opacityR = 255;
+            opacityY = 100;
+            opacityG = 100;
         }
         else if(strength == 2){
+            opacityR = 255;
             opacityY = 255;
+            opacityG = 100;
+        }
+        else if(strength == 3)
+        {
+            opacityR = 255;
+            opacityY = 255;
+            opacityG = 100;
+        }
+        else if(strength == 4){
+            opacityR = 255;
+            opacityY = 255;
+            opacityG = 255;
         }
         else{
             opacityG = 100;

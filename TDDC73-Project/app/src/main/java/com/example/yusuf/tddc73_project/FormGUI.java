@@ -17,6 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import java.util.Arrays;
+
 public class FormGUI extends RelativeLayout {
 
     TextView nameText, pswText, emailText, ageText, pswStrengthText;
@@ -178,31 +181,65 @@ public class FormGUI extends RelativeLayout {
     }
 
     //Password must be at least 8 characters
-    //Password must contain at least one uppercase letter
+    //Password must contain at least two uppercase letter
     //Password must contain at least one digit
 
+    //Password is too short if < 8 characters
+    //Password is weak if only one uppercase or only one digit
+    //Password is strong if both uppercase and one digit
+
+    private char c;
+
     public int calcPswStrength(String psw){
+
+        int strengthDegree = 0;
+        boolean boolArray[] = new boolean[3];
 
         int length = psw.length();
         if(length == 0){
             pswStrengthText.setText("");
-            return 0;
+            return strengthDegree;
         }
 
         if(length < 8){
-            Log.d("TOO SHORT PASSWORD ", "LENGTH IS " + length);
+            //Log.d("TOO SHORT PASSWORD ", "LENGTH IS " + length);
             pswStrengthText.setText("TOO SHORT");
-            return 1;
+            strengthDegree++;
+            return strengthDegree;
         }
-        else if(length > 8){
+        else if(length >= 8){
+            boolArray[0] = true; //first true because of length is larger than 8
+            strengthDegree++;
             for(int i = 0; i < length; i++){
+                c = psw.charAt(i);
+                if(Character.isUpperCase(c)){
+                    boolArray[1] = true; //Second true because uppercase
+                }
 
+                if(Character.isDigit(c)){
+                    boolArray[2] = true; // third true because digit
+                }
+            }
+                //Log.d("ARRAY LENGTH", "LENGTH" + boolArray.length);
+            for(int j = 0; j < boolArray.length; j++ ){
+                if(boolArray[j])
+                    strengthDegree++;
+
+                if(strengthDegree == 2){
+                    pswStrengthText.setText("WEAK PASSWORD");
+                }
+
+                if(strengthDegree == 4){
+                    pswStrengthText.setText("STRONG PASSWORD");
+                }
             }
 
-            return 2;
+            Log.d("STRENGTH DEGREE IS ", "STRENGTH" + strengthDegree);
+            return strengthDegree;
         }
 
-        return 0;
+            return 0;
+
     }
 
 }
