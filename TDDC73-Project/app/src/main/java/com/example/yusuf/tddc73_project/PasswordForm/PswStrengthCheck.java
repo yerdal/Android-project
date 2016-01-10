@@ -1,4 +1,4 @@
-package com.example.yusuf.tddc73_project;
+package com.example.yusuf.tddc73_project.PasswordForm;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,21 +8,22 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 
+import com.example.yusuf.tddc73_project.PswForm;
+
 
 /**
  * Created by Yusuf on 14/12/15.
  */
-public class pswStrengthCheck extends View{
+public class PswStrengthCheck extends View{
 
     Rect redRect, yellowRect, greenRect;
     Paint redPaint, yellowPaint, greenPaint;
     private int opacityR, opacityY, opacityG;
 
-    public pswStrengthCheck(Context context){
+    public PswStrengthCheck(Context context){
         super(context);
 
-        init();
-
+        initOpacity();
 
     }
 
@@ -34,13 +35,7 @@ public class pswStrengthCheck extends View{
             opacityY = 100;
             opacityG = 100;
         }
-        else if(strength == 2){
-            opacityR = 255;
-            opacityY = 255;
-            opacityG = 100;
-        }
-        else if(strength == 3)
-        {
+        else if(strength == 2 || strength == 3){
             opacityR = 255;
             opacityY = 255;
             opacityG = 100;
@@ -57,7 +52,7 @@ public class pswStrengthCheck extends View{
         }
     }
 
-    public void init(){
+    public void initOpacity(){
 
         opacityR = 100;
         opacityY = 100;
@@ -65,9 +60,11 @@ public class pswStrengthCheck extends View{
 
     }
 
-    public void onDraw(Canvas canvas){
+    protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         //Log.d("Opacity is ", "OP" + );
+
+        //Red Rectangle
         redRect = new Rect();
         redRect.set(0, 0, 300, 20);
 
@@ -76,6 +73,7 @@ public class pswStrengthCheck extends View{
         redPaint.setAlpha(opacityR);
         redPaint.setStyle(Paint.Style.FILL);
 
+        //Yellow Rectangle
         yellowRect = new Rect();
         yellowRect.set(300, 0, 600, 20);
 
@@ -84,6 +82,7 @@ public class pswStrengthCheck extends View{
         yellowPaint.setAlpha(opacityY);
         yellowPaint.setStyle(Paint.Style.FILL);
 
+        //Green Rectangle
         greenRect = new Rect();
         greenRect.set(600, 0, 900, 20);
 
@@ -92,7 +91,7 @@ public class pswStrengthCheck extends View{
         greenPaint.setAlpha(opacityG);
         greenPaint.setStyle(Paint.Style.FILL);
 
-
+        //Draw all to canvas
         canvas.drawRect(redRect, redPaint);
         canvas.drawRect(yellowRect, yellowPaint);
         canvas.drawRect(greenRect, greenPaint);
@@ -100,7 +99,7 @@ public class pswStrengthCheck extends View{
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
-        //Sets the dimensions for the item.
+
         setMeasuredDimension(1000, 1000);
     }
 

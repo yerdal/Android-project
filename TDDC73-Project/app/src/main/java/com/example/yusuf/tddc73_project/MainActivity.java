@@ -1,29 +1,49 @@
 package com.example.yusuf.tddc73_project;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.example.yusuf.tddc73_project.AccountRegistration.AccountForm;
+import com.example.yusuf.tddc73_project.PasswordForm.PswForm;
+import com.example.yusuf.tddc73_project.PasswordForm.PswStrengthAlgorithm;
+import com.example.yusuf.tddc73_project.PasswordForm.PswStrengthCheck;
+
 public class MainActivity extends AppCompatActivity {
+
+    //AccountForm (more specified??)
+    //PswForm
+    //PswAlgorithm
+    //StrengthCheck
+    PswStrengthAlgorithm pswAlgorithm;
+    PswStrengthCheck checkStrength;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
+
         RelativeLayout myLayout = new RelativeLayout(this);
 
-        FormGUI form = new FormGUI(this);
+        //PswForm pswForm = new PswForm(this);
+        AccountForm accountForm = new AccountForm(this);
 
-        myLayout.addView(form);
+        pswAlgorithm = new PswStrengthAlgorithm();
+        checkStrength = new PswStrengthCheck(this);
+
+        PswForm pswForm = new PswForm(this, pswAlgorithm, checkStrength);
+
+        /*RelativeLayout.LayoutParams myLayoutPswFormParams =
+                new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);*/
+
+
+        myLayout.addView(pswForm);
+        //myLayout.addView(accountForm);
         setContentView(myLayout);
 
 
