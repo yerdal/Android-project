@@ -1,26 +1,28 @@
 package com.example.yusuf.tddc73_project.PasswordForm;
 
-import com.example.yusuf.tddc73_project.PswForm;
+//import com.example.yusuf.tddc73_project.PswForm;
 
 /**
  * Created by Yusuf on 10/01/16.
  */
 public class PswStrengthAlgorithm {
 
+    /**
+     * Password must be at least 8 characters
+     * Password must contain at least one uppercase letter
+     * Password must contain at least one digit
 
-    //Password must be at least 8 characters
-    //Password must contain at least two uppercase letter
-    //Password must contain at least one digit
-
-    //Password is too short if < 8 characters
-    //Password is weak if there are 8 characters but only one uppercase or only one digit
-    //Password is strong if there are 8 characters and one uppercase and one digit
+     * Password is too short if < 8 characters
+     * Password is weak if there are 8 characters but only one uppercase or only one digit
+     * Password is strong if there are 8 characters and one uppercase and one digit
 
 
-    //Strength is 0 if 0 characters
-    //Strength is 1 if length is < 8
-    //Strength is 2 or 3 if characters > 8 but only one digit or uppercase
-    //Strength is 4 if characters > 8 and contains one digit and one uppercase
+     * Strength is 0 if 0 characters
+     * Strength is 1 if length is < 8
+     * Strength is 2 or 3 if characters > 8 but only one digit or one uppercase
+     * Strength is 4 if characters > 8 and contains one digit and one uppercase
+
+     */
 
 
     private char c;
@@ -32,13 +34,10 @@ public class PswStrengthAlgorithm {
 
         int length = psw.length();
         if(length == 0){
-            //pswStrengthText.setText("ENTER PASSWORD");
             return strengthDegree;
         }
 
         if(length < 8){
-            //Log.d("TOO SHORT PASSWORD ", "LENGTH IS " + length);
-            //pswStrengthText.setText("TOO SHORT");
             strengthDegree++;
             return strengthDegree;
         }
@@ -55,12 +54,11 @@ public class PswStrengthAlgorithm {
                     boolArray[2] = true; // third true because digit
                 }
             }
-            //Log.d("ARRAY LENGTH", "LENGTH" + boolArray.length);
+
             for(int j = 0; j < boolArray.length; j++ ){
                 if(boolArray[j]) //if true degree increases
                     strengthDegree++;
             }
-
 
             return strengthDegree;
         }

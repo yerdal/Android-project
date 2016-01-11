@@ -27,8 +27,11 @@ public class AccountForm extends RelativeLayout{
 
     }
 
-    public void createNameField(String nameText){
-        
+    public void createNameField(Context context, String text){
+        nameText = new TextView(context);
+        nameText.setText(text);
+
+
     }
 
     public void createForm(Context context){

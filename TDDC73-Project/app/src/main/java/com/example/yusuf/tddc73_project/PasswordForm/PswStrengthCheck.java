@@ -8,13 +8,18 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 
-import com.example.yusuf.tddc73_project.PswForm;
+//import com.example.yusuf.tddc73_project.PswForm;
 
 
 /**
  * Created by Yusuf on 14/12/15.
  */
 public class PswStrengthCheck extends View{
+    /**
+     * Checking the strength of password returned
+     * in PswStrengthAlgorithm and changes the colors of the bars
+     * accordingly to the strenght
+     * */
 
     Rect redRect, yellowRect, greenRect;
     Paint redPaint, yellowPaint, greenPaint;
