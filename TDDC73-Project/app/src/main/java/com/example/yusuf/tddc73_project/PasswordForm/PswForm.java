@@ -12,11 +12,19 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+/**
+ * To use the component the user has to create the method in the main and
+ * use the constructors, either the user provides their own algorithm for the password strength
+ * or use the defualt one.
+ *
+ */
+
 public class PswForm extends RelativeLayout {
 
     TextView  pswText, pswStrengthText;
     EditText pswInput;
     PswStrengthCheck checkPsw;
+    PasswordInterface passwordInterface;
 
     PswStrengthAlgorithm pswStrength;
 
@@ -47,7 +55,6 @@ public class PswForm extends RelativeLayout {
     }
 
     public void createForm(Context context){
-        //CREATE THE PSW CHECK
 
         pswText = new TextView(context);
         pswText.setText("Password: ");
@@ -73,6 +80,7 @@ public class PswForm extends RelativeLayout {
                 checkPsw.invalidate();
                 checkPsw.checkPswStrength(pswStrength.calcPswStrength(pswInput.getText().toString()));
                 changePswStrengthText(pswStrength.calcPswStrength(pswInput.getText().toString()));
+                passwordInterface.passwordStrength(pswStrength.calcPswStrength(pswInput.getText().toString()));
 
             }
 
@@ -115,8 +123,6 @@ public class PswForm extends RelativeLayout {
 
         colorBar1Params.addRule(RelativeLayout.BELOW, pswStrengthText.getId());
 
-
-
         addView(pswText, pswTextParams);
         addView(pswInput, pswInputTextParams);
         addView(checkPsw, colorBar1Params);
@@ -131,13 +137,20 @@ public class PswForm extends RelativeLayout {
         else if(strength == 1){
             pswStrengthText.setText("TOO SHORT");
         }
-        else if(strength == 2 || strength == 3){
+        else if(strength == 2){
             pswStrengthText.setText("WEAK PASSWORD");
+        }
+        else if(strength == 3){
+            pswStrengthText.setText("STILL WEAK PASSWORD");
         }
         else if(strength == 4){
             pswStrengthText.setText("STRONG PASSWORD");
         }
-
     }
 
+    public void setPasswordInterface(PasswordInterface passInt){
+
+        passwordInterface = passInt;
+
+    }
 }

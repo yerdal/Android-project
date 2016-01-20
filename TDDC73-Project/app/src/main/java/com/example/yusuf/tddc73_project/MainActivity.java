@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
 import com.example.yusuf.tddc73_project.AccountRegistration.AccountForm;
+import com.example.yusuf.tddc73_project.AccountRegistration.Row;
+import com.example.yusuf.tddc73_project.PasswordForm.PasswordInterface;
 import com.example.yusuf.tddc73_project.PasswordForm.PswForm;
 import com.example.yusuf.tddc73_project.PasswordForm.PswStrengthAlgorithm;
 import com.example.yusuf.tddc73_project.PasswordForm.PswStrengthCheck;
@@ -34,16 +36,47 @@ public class MainActivity extends AppCompatActivity {
         pswAlgorithm = new PswStrengthAlgorithm();
         checkStrength = new PswStrengthCheck(this);
 
-        PswForm pswForm = new PswForm(this, pswAlgorithm, checkStrength);
+        //PswForm pswForm = new PswForm(this, pswAlgorithm, checkStrength);
 
-        /*RelativeLayout.LayoutParams myLayoutPswFormParams =
-                new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);*/
+        Row name = new Row(this, "Name: ", true);
+        accountForm.addRow(name);
 
+        Row lastName = new Row(this, "Last name: ", false);
+        accountForm.addRow(lastName);
 
-        myLayout.addView(pswForm);
-        //myLayout.addView(accountForm);
+        Row email = new Row(this, "Email: ", true);
+        accountForm.addRow(email);
+
+        Row psw = new Row(this, "Password: ", true, true);
+        accountForm.addRow(psw);
+
+        accountForm.createBox(this, "I Agree to terms of use");
+        accountForm.createBtn(this, "Sign up");
+
+        //Feedback for the user when the password is strong enough
+        /*pswForm.setPasswordInterface(new PasswordInterface() {
+            @Override
+            public void passwordStrength(int strength) {
+                if (strength == 0) {
+                   System.out.println("Empty password");
+                }
+                else if (strength == 1) {
+                    System.out.println("Password is too short!");
+                }
+                else if(strength == 2){
+                    System.out.println("Password is too weak!");
+                }
+                else if(strength == 3){
+                    System.out.println("Still a weak password!");
+                }
+                else if(strength == 4){
+                    System.out.println("Password is strong!");
+                }
+            }
+        });*/
+
+        //myLayout.addView(pswForm);
+        myLayout.addView(accountForm);
         setContentView(myLayout);
 
 

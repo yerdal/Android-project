@@ -4,9 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 
 //import com.example.yusuf.tddc73_project.PswForm;
 
@@ -14,12 +17,15 @@ import android.view.View;
 /**
  * Created by Yusuf on 14/12/15.
  */
+
+/**
+ * Checking the strength of password returned
+ * in PswStrengthAlgorithm and changes the colors of the bars
+ * accordingly to the strength
+ * */
+
 public class PswStrengthCheck extends View{
-    /**
-     * Checking the strength of password returned
-     * in PswStrengthAlgorithm and changes the colors of the bars
-     * accordingly to the strenght
-     * */
+
 
     Rect redRect, yellowRect, greenRect;
     Paint redPaint, yellowPaint, greenPaint;
@@ -34,7 +40,7 @@ public class PswStrengthCheck extends View{
 
     public void checkPswStrength(int strength){
         if(strength == 1){
-            //Log.d("PASSWORD RED CHECK", "EINARS BALLE");
+
             //redPaint.setAlpha(255);
             opacityR = 255;
             opacityY = 100;
@@ -58,7 +64,6 @@ public class PswStrengthCheck extends View{
     }
 
     public void initOpacity(){
-
         opacityR = 100;
         opacityY = 100;
         opacityG = 100;
@@ -69,9 +74,16 @@ public class PswStrengthCheck extends View{
         super.onDraw(canvas);
         //Log.d("Opacity is ", "OP" + );
 
+        //Rectangles depends on the screensize, fills a third per rectangle.
+        Display display = this.getDisplay();
+
+        Point size = new Point();
+        display.getRealSize(size);
+        int width = size.x;
+
         //Red Rectangle
         redRect = new Rect();
-        redRect.set(0, 0, 300, 20);
+        redRect.set(0, 0, width/3, 20);
 
         redPaint = new Paint();
         redPaint.setColor(Color.RED);
@@ -80,7 +92,7 @@ public class PswStrengthCheck extends View{
 
         //Yellow Rectangle
         yellowRect = new Rect();
-        yellowRect.set(300, 0, 600, 20);
+        yellowRect.set(width/3, 0, (2*width)/3, 20);
 
         yellowPaint = new Paint();
         yellowPaint.setColor(Color.YELLOW);
@@ -89,7 +101,7 @@ public class PswStrengthCheck extends View{
 
         //Green Rectangle
         greenRect = new Rect();
-        greenRect.set(600, 0, 900, 20);
+        greenRect.set((2*width)/3, 0, width, 20);
 
         greenPaint = new Paint();
         greenPaint.setColor(Color.GREEN);

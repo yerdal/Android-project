@@ -5,25 +5,25 @@ package com.example.yusuf.tddc73_project.PasswordForm;
 /**
  * Created by Yusuf on 10/01/16.
  */
+
+/**
+ * Password must be at least 8 characters
+ * Password must contain at least one uppercase letter
+ * Password must contain at least one digit
+
+ * Password is too short if < 8 characters
+ * Password is weak if there are 8 characters but only one uppercase or only one digit
+ * Password is strong if there are 8 characters and one uppercase and one digit
+
+
+ * Strength is 0 if 0 characters
+ * Strength is 1 if length is < 8
+ * Strength is 2 or 3 if characters > 8 but only one digit or one uppercase
+ * Strength is 4 if characters > 8 and contains one digit and one uppercase
+
+ */
+
 public class PswStrengthAlgorithm {
-
-    /**
-     * Password must be at least 8 characters
-     * Password must contain at least one uppercase letter
-     * Password must contain at least one digit
-
-     * Password is too short if < 8 characters
-     * Password is weak if there are 8 characters but only one uppercase or only one digit
-     * Password is strong if there are 8 characters and one uppercase and one digit
-
-
-     * Strength is 0 if 0 characters
-     * Strength is 1 if length is < 8
-     * Strength is 2 or 3 if characters > 8 but only one digit or one uppercase
-     * Strength is 4 if characters > 8 and contains one digit and one uppercase
-
-     */
-
 
     private char c;
 
